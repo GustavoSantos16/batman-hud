@@ -108,7 +108,6 @@ body{
   .items li img {
     max-width: 40px;
     max-height: 40px;
-    transform:  rotate(0deg) rotate(calc(-1 * var(--rotation)));
     cursor: pointer;
     opacity: 0.9;
   }
@@ -124,6 +123,7 @@ body{
     align-items: center;
     flex-direction: column;
     color: #fff;
+    transform:  rotate(0deg) rotate(calc(-1 * var(--rotation)));
   }
 
 
