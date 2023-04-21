@@ -1,33 +1,62 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+
 body{
   background-color: #000;
   margin: 0px;
   padding: 0px;
+  font-family: 'Roboto Condensed', sans-serif;
 }
+
+.neonText {
+  color: #F0FEFF;
+  text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #0fa,
+      0 0 82px #0fa,
+      0 0 92px #0fa,
+      0 0 102px #0fa,
+      0 0 151px #0fa;
+}
+
+
 
 .menu{
   width: 600px;
   height: 600px;
-  background-color: aqua;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: auto;
-  margin-top: 150px;
+  margin-top: 25px;
 
-  background-image: url('hud-cropped.gif');
+  background-image: url('oficial-circle.png');
   background-size: cover;
   background-position: center;
+  z-index: 2;
+  
 }
+
+
 
 .circle {
     position: relative;
-    width: 480px;
-    height: 480px;
+    width: 450px;
+    height: 450px;
     border-radius: 50%;
-    background-color: rgba(0,0,0,0.8);
     
+    /* background-color: rgba(0,0,0,0.8); */
+    
+    background-image: url('hud-cropped.gif');
+    background-size: cover;
+    background-position: center;
     /* background-color: #000; */
     /* overflow: hidden; */
+
+   
   }
   
   .items {
@@ -43,7 +72,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1;
+    z-index: 10;
   }
   
   .items li {
@@ -58,6 +87,7 @@ body{
     padding: 0;
     text-align: center;
     transition: all 0.3s ease-in-out;
+    padding: 25px 0px 25px 0px ;
 
     display: flex;
     flex-direction: column;
@@ -112,11 +142,11 @@ body{
     opacity: 0.9;
   }
 
-  .items li img:hover {
-    opacity: 1;
-    transition: opacity 0.2s ease;
+  .items li i {
+    font-size: 32px;
+    cursor: pointer;
+    opacity: 0.9;
   }
-  
 
   .icon-and-text{
     display: flex;
@@ -124,6 +154,24 @@ body{
     flex-direction: column;
     color: #fff;
     transform:  rotate(0deg) rotate(calc(-1 * var(--rotation)));
+    cursor: pointer;
+  }
+
+  .icon-and-text strong{
+    padding-top: 10px;
+  }
+
+  .icon-and-text:hover i {
+    color: #F0FEFF;
+    text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #0fa,
+    0 0 82px #0fa,
+    0 0 92px #0fa,
+    0 0 102px #0fa,
+    0 0 151px #0fa;
   }
 
 
