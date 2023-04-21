@@ -4,17 +4,28 @@
 *{
   box-sizing: border-box;
   outline: 0;
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 body{
   background-color: #000;
   margin: 0px;
   padding: 0px;
-  font-family: 'Roboto Condensed', sans-serif;
-
   width: 100%;
   height: auto;
   min-height: 100vh;
 
   
+}
+
+.neonText {
+  color: #F0FEFF;
+  text-shadow: 
+             0 0 3px #638586,
+             0 0 6px #638586,
+             0 0 9px #638586
+
+
 }
