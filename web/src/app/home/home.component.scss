@@ -1,13 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
-
-body{
-  background-color: #000;
-  margin: 0px;
-  padding: 0px;
-  font-family: 'Roboto Condensed', sans-serif;
-}
 
 .neonText {
   color: #F0FEFF;
@@ -37,7 +29,7 @@ body{
   top: 50%;
   margin-top: -300px;
 
-  background-image: url('oficial-circle.png');
+  background-image: url('/assets/oficial-circle.png');
   background-size: cover;
   background-position: center;
   z-index: 2;
@@ -54,7 +46,7 @@ body{
     
     /* background-color: rgba(0,0,0,0.8); */
     
-    background-image: url('hud-cropped.gif');
+    background-image: url('/assets/hud-cropped.gif');
     background-size: cover;
     background-position: center;
     /* background-color: #000; */
