@@ -1,111 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" >
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HUD de Metas</title>
+  <meta name="description" content="Tracker de metas pessoais com interface estilo HUD do Batman Arkham.">
 
-    <script>
-        function showImage(src){
-            document.querySelector("#image-center").src = src;
-            document.querySelector("#image-center").style.display = 'block';
-        }
-    </script>
+  <!-- Tipografia -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500&family=Saira+Condensed:wght@600;700&display=swap">
+  <!-- Ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/wheel.css">
+  <link rel="stylesheet" href="css/panel.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/modal.css">
+
+  <script type="module" src="js/main.js"></script>
 </head>
 <body>
-    <div class="menu">
-        <div class="circle">
-          <img src="habibao.jpeg" alt="Imagem inicial" id="image-center" class="center-image" style="display: none;">
-          <ul class="items">
-            <li>
-              <div class="icon-and-text">
-                <i class="fas fa-envelope"></i>
-                <strong class="neonText">70%</strong>
-              </div>
-              <div class="icon-and-text">
-                <i class="fas fa-phone"></i>
-                <strong class="neonText">70%</strong>
-              </div>
-            </li>
-            <li>
-              <div class="icon-and-text">
-                <i class="fas fa-envelope-open "></i>
-                <strong class="neonText">60%</strong>
-              </div>
-              <div class="icon-and-text">
-                <i class="fas fa-tablet"></i>
-                <strong class="neonText">80%</strong>
-              </div>
-            </li>
-            <li>
-              <div class="icon-and-text">
-                <i class="fas fa-bolt "></i>
-                <strong class="neonText">90%</strong>
-              </div>
-              <div class="icon-and-text">
-                <i class="fas fa-laptop"></i>
-                <strong class="neonText">50%</strong>
-              </div>
-            </li>
-            <li>
-              <div class="icon-and-text">
-                <i class="fas fa-headphones"></i>
-                <strong class="neonText">70%</strong>
-              </div>
-              <div class="icon-and-text">
-                <i class="fas fa-code"></i>
-                <strong class="neonText">80%</strong>
-              </div>
-            </li>
-            <li>
-              <div class="icon-and-text">
-                <i class="fas fa-camera"></i>
-                <strong class="neonText">50%</strong>
-              </div>
-              <div class="icon-and-text">
-                <i class="fas fa-globe"></i>
-                <strong class="neonText">70%</strong>
-              </div>
-            </li>
-            <li>
-              <div class="icon-and-text">
-                <i class="fas fa-cloud"></i>
-                <strong class="neonText">60%</strong>
-              </div>
-              <div class="icon-and-text">
-                <i class="fas fa-pencil-alt"></i>
-                <strong class="neonText">90%</strong>
-              </div>
-            </li>
-            <li>
-              <div class="icon-and-text">
-                <i class="fas fa-plane"></i>
-                <strong class="neonText">80%</strong>
-              </div>
-              <div class="icon-and-text">
-                <i class="fas fa-lightbulb"></i>
-                <strong class="neonText">70%</strong>
-              </div>
-            </li>
-            <li>
-              <div class="icon-and-text">
-                <i class="fas fa-book"></i>
-                <strong class="neonText">50%</strong>
-              </div>
-              <div class="icon-and-text">
-                <i class="fas fa-shopping-cart"></i>
-                <strong class="neonText">80%</strong>
-              </div>
-            </li>
-          </ul>
-          
-        </div>
+  <!-- Textura de scanline/ruído -->
+  <div class="textura" aria-hidden="true"></div>
+
+  <a class="pular-para-conteudo" href="#roda-area">Pular para a roda</a>
+
+  <!-- Barra superior -->
+  <header class="barra-topo">
+    <button id="btn-menu" class="btn-icone" type="button" aria-label="Abrir menu de containers" aria-expanded="false" aria-controls="drawer">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1 class="barra-topo__titulo" id="titulo-container">Carregando…</h1>
+    <button id="btn-nova-meta" class="btn-icone" type="button" aria-label="Criar nova meta">
+      <i class="fa-solid fa-plus" aria-hidden="true"></i>
+    </button>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="layout">
+    <section class="painel" id="painel" aria-label="Detalhe da meta selecionada"></section>
+
+    <section class="roda-area" id="roda-area" aria-label="Roda de metas">
+      <div class="roda" id="roda">
+        <svg class="roda__svg" viewBox="0 0 900 900" aria-hidden="true" focusable="false">
+          <!-- Moldura externa -->
+          <circle class="anel anel--fino anel--desenha" cx="450" cy="450" r="438" pathLength="100"></circle>
+          <circle class="anel anel--pontilhado" cx="450" cy="450" r="424" stroke-dasharray="1 7"></circle>
+
+          <!-- Ticks e hachuras geradas por JS -->
+          <g class="roda__ticks" id="roda-ticks"></g>
+
+          <!-- Órbitas onde ficam as metas -->
+          <circle class="anel anel--orbita" id="anel-orbita-1" cx="450" cy="450" r="345" stroke-dasharray="1 9"></circle>
+          <circle class="anel anel--orbita" id="anel-orbita-2" cx="450" cy="450" r="248" stroke-dasharray="1 9" style="display:none"></circle>
+
+          <!-- Linha radial da seleção -->
+          <path class="radial-selecao" id="radial-selecao" d=""></path>
+
+          <!-- Arcos de progresso de cada meta -->
+          <g class="roda__arcos" id="roda-arcos"></g>
+
+          <!-- Núcleo central -->
+          <g class="roda__nucleo">
+            <circle class="anel anel--gira gira-a" cx="450" cy="450" r="212" stroke-dasharray="120 34 8 34"></circle>
+            <circle class="anel anel--gira gira-b" cx="450" cy="450" r="196" stroke-dasharray="4 20"></circle>
+            <circle class="anel anel--gira gira-c" cx="450" cy="450" r="132" stroke-dasharray="180 60 20 60"></circle>
+            <circle class="anel anel--nucleo anel--desenha" cx="450" cy="450" r="150" pathLength="100"></circle>
+            <circle class="anel anel--nucleo-interno" cx="450" cy="450" r="104"></circle>
+          </g>
+
+          <!-- Arco de progresso do container -->
+          <circle class="arco-container__trilho" cx="450" cy="450" r="168"></circle>
+          <circle class="arco-container" id="arco-container" cx="450" cy="450" r="168" pathLength="100" stroke-dasharray="0 100"></circle>
+        </svg>
+
+        <!-- Núcleo em HTML (número grande + rótulo + estado vazio) -->
+        <div class="roda__centro" id="roda-centro"></div>
+
+        <!-- Marcadores das metas em HTML -->
+        <div class="roda__marcadores" id="roda-marcadores"></div>
       </div>
-      
-      
-      
+    </section>
+  </main>
+
+  <!-- Rodapé com atalhos -->
+  <footer class="barra-rodape">
+    <span><kbd>←</kbd><kbd>→</kbd> Girar seleção</span>
+    <span class="sep">·</span>
+    <span><kbd>Enter</kbd> Editar</span>
+    <span class="sep">·</span>
+    <span><kbd>N</kbd> Nova meta</span>
+    <span class="sep">·</span>
+    <span><kbd>Esc</kbd> Fechar</span>
+  </footer>
+
+  <!-- Overlay compartilhado por drawer e modais -->
+  <div class="overlay" id="overlay" hidden></div>
+
+  <!-- Drawer de containers -->
+  <aside class="drawer" id="drawer" aria-label="Containers" aria-hidden="true" inert></aside>
+
+  <!-- Camada de modais -->
+  <div id="camada-modais"></div>
+
+  <!-- Toasts -->
+  <div class="toasts" id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+  <!-- Input escondido para importar JSON -->
+  <input type="file" id="input-importar" accept="application/json,.json" hidden>
 </body>
 </html>

@@ -1,0 +1,68 @@
+/* ============================================================
+   tokens.css — variáveis de cor, tipografia, espaçamento e sombras
+   ============================================================ */
+
+:root {
+  /* --- Paleta --- */
+  --hud-void:        #04070A;  /* fundo */
+  --hud-panel:       #0A1116;  /* superfícies */
+  --hud-panel-alto:  #0E1920;  /* superfícies elevadas (modais, drawer) */
+  --hud-line:        #1C3A42;  /* linhas estruturais, ticks */
+  --hud-cyan:        #4FE3E8;  /* destaque primário, anéis ativos */
+  --hud-cyan-dim:    #2A7F87;  /* anéis inativos, bordas */
+  --hud-green:       #6BFF9E;  /* concluído, botão salvar */
+  --hud-amber:       #FFA53D;  /* seleção ativa */
+  --hud-red:         #FF5A5A;  /* destrutivo */
+  --hud-text:        #E6F3F5;
+  --hud-text-muted:  #739299;
+
+  /* --- Tipografia --- */
+  --fonte-display: "Saira Condensed", "Arial Narrow", sans-serif;
+  --fonte-texto:   "Barlow", system-ui, -apple-system, sans-serif;
+
+  --ts-xs:   0.6875rem; /* 11px */
+  --ts-sm:   0.8125rem; /* 13px */
+  --ts-md:   0.9375rem; /* 15px */
+  --ts-lg:   1.125rem;  /* 18px */
+  --ts-xl:   1.75rem;   /* 28px */
+  --ts-2xl:  2.5rem;    /* 40px */
+  --ts-3xl:  3.75rem;   /* 60px */
+
+  --tracking-display: -0.01em;
+  --tracking-eyebrow: 0.18em;
+
+  /* --- Espaçamento --- */
+  --e-1: 4px;
+  --e-2: 8px;
+  --e-3: 12px;
+  --e-4: 16px;
+  --e-5: 24px;
+  --e-6: 32px;
+  --e-7: 48px;
+  --e-8: 64px;
+
+  /* --- Formas --- */
+  --raio: 3px;
+  --raio-sm: 2px;
+  --borda: 1px solid var(--hud-line);
+
+  /* --- Brilhos (usar com parcimônia) --- */
+  --glow-cyan:  0 0 12px rgba(79, 227, 232, 0.35);
+  --glow-amber: 0 0 16px rgba(255, 165, 61, 0.45);
+  --glow-green: 0 0 12px rgba(107, 255, 158, 0.35);
+  --sombra-flutuante: 0 24px 60px rgba(0, 0, 0, 0.75);
+
+  /* --- Tempos --- */
+  --t-rapido: 140ms;
+  --t-medio: 280ms;
+  --t-lento: 500ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+
+  /* --- Camadas --- */
+  --z-roda: 1;
+  --z-topo: 20;
+  --z-overlay: 40;
+  --z-drawer: 50;
+  --z-modal: 60;
+  --z-toast: 70;
+}

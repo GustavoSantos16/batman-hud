@@ -1,0 +1,111 @@
+/* ============================================================
+   layout.css — grid da tela principal, barras e responsividade
+   ============================================================ */
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* --- Barra superior --- */
+.barra-topo {
+  position: relative;
+  z-index: var(--z-topo);
+  display: grid;
+  grid-template-columns: 38px 1fr 38px;
+  align-items: center;
+  gap: var(--e-3);
+  padding: var(--e-3) var(--e-4);
+  border-bottom: var(--borda);
+  background-color: rgba(4, 7, 10, 0.85);
+}
+
+.barra-topo__titulo {
+  font-family: var(--fonte-display);
+  font-weight: 600;
+  font-size: var(--ts-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  text-align: center;
+  color: var(--hud-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- Grid principal --- */
+.layout {
+  position: relative;
+  z-index: var(--z-roda);
+  display: grid;
+  grid-template-columns: minmax(320px, 40%) 1fr;
+  align-items: stretch;
+  min-height: 0;
+}
+
+.painel {
+  border-right: var(--borda);
+  padding: var(--e-6) var(--e-6) var(--e-7);
+  overflow-y: auto;
+}
+
+.roda-area {
+  display: grid;
+  place-items: center;
+  padding: var(--e-5);
+  min-width: 0;
+}
+
+/* --- Rodapé de atalhos --- */
+.barra-rodape {
+  position: relative;
+  z-index: var(--z-topo);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--e-2);
+  padding: var(--e-2) var(--e-4);
+  border-top: var(--borda);
+  font-family: var(--fonte-display);
+  font-size: var(--ts-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--hud-text-muted);
+  background-color: rgba(4, 7, 10, 0.85);
+}
+.barra-rodape .sep { opacity: 0.4; }
+.barra-rodape kbd {
+  display: inline-block;
+  min-width: 20px;
+  padding: 1px 5px;
+  margin-right: 3px;
+  font-family: var(--fonte-display);
+  font-size: var(--ts-xs);
+  text-align: center;
+  color: var(--hud-cyan-dim);
+  border: 1px solid var(--hud-line);
+  border-radius: var(--raio-sm);
+}
+
+/* --- Responsividade --- */
+@media (max-width: 1000px) {
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-areas: "roda" "painel";
+  }
+  .roda-area { grid-area: roda; padding: var(--e-4) var(--e-3) 0; }
+  .painel {
+    grid-area: painel;
+    border-right: none;
+    border-top: var(--borda);
+    padding: var(--e-5) var(--e-4) var(--e-7);
+  }
+}
+
+@media (max-width: 640px) {
+  .barra-rodape { display: none; }
+  .painel { padding: var(--e-4) var(--e-3) var(--e-6); }
+}

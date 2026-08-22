@@ -1,0 +1,236 @@
+/* ============================================================
+   base.css — reset, tipografia base, utilitários e foco visível
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, h1, h2, h3, h4, p, figure, blockquote, dl, dd, ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol { list-style: none; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  min-height: 100vh;
+  background-color: var(--hud-void);
+  color: var(--hud-text);
+  font-family: var(--fonte-texto);
+  font-size: var(--ts-md);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+button { cursor: pointer; }
+button[disabled] { cursor: not-allowed; opacity: 0.35; }
+
+/* Textura sutil de scanline + ruído no fundo (opacidade baixíssima) */
+.textura {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(79, 227, 232, 0.04) 0px,
+      rgba(79, 227, 232, 0.04) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    radial-gradient(ellipse at 50% 45%, rgba(42, 127, 135, 0.10), transparent 70%);
+}
+
+/* --- Tipografia utilitária --- */
+.display {
+  font-family: var(--fonte-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-display);
+}
+
+.eyebrow {
+  font-family: var(--fonte-display);
+  font-weight: 600;
+  font-size: var(--ts-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--hud-text-muted);
+}
+
+.num { font-variant-numeric: tabular-nums; }
+
+/* --- Foco visível --- */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--hud-amber);
+  outline-offset: 2px;
+}
+
+/* --- Acessibilidade --- */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.pular-para-conteudo {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: var(--z-toast);
+  background: var(--hud-panel-alto);
+  color: var(--hud-cyan);
+  padding: var(--e-3) var(--e-4);
+  border: 1px solid var(--hud-cyan-dim);
+}
+.pular-para-conteudo:focus { left: var(--e-3); top: var(--e-3); }
+
+/* --- Botões --- */
+.btn-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  color: var(--hud-cyan-dim);
+  border: 1px solid transparent;
+  border-radius: var(--raio-sm);
+  transition: color var(--t-rapido) var(--ease),
+              border-color var(--t-rapido) var(--ease),
+              background-color var(--t-rapido) var(--ease);
+}
+.btn-icone:hover {
+  color: var(--hud-cyan);
+  border-color: var(--hud-line);
+  background-color: rgba(79, 227, 232, 0.06);
+}
+.btn-icone--perigo:hover { color: var(--hud-red); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e-2);
+  min-height: 42px;
+  padding: 0 var(--e-5);
+  font-family: var(--fonte-display);
+  font-weight: 600;
+  font-size: var(--ts-md);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--hud-line);
+  border-radius: var(--raio-sm);
+  color: var(--hud-text);
+  background-color: transparent;
+  transition: background-color var(--t-rapido) var(--ease),
+              border-color var(--t-rapido) var(--ease),
+              color var(--t-rapido) var(--ease);
+}
+.btn:hover { border-color: var(--hud-cyan-dim); background-color: rgba(79, 227, 232, 0.06); }
+
+.btn--primario {
+  color: var(--hud-void);
+  background-color: var(--hud-green);
+  border-color: var(--hud-green);
+  font-weight: 700;
+}
+.btn--primario:hover { background-color: #8affb6; border-color: #8affb6; }
+
+.btn--secundario { color: var(--hud-text-muted); }
+.btn--secundario:hover { color: var(--hud-text); }
+
+.btn--perigo { color: var(--hud-red); border-color: rgba(255, 90, 90, 0.4); }
+.btn--perigo:hover { background-color: rgba(255, 90, 90, 0.12); border-color: var(--hud-red); }
+
+.btn--bloco { width: 100%; }
+
+.btn--destaque {
+  color: var(--hud-cyan);
+  border-color: var(--hud-cyan-dim);
+  background-color: rgba(79, 227, 232, 0.08);
+}
+.btn--destaque:hover { background-color: rgba(79, 227, 232, 0.16); border-color: var(--hud-cyan); }
+
+/* --- Toasts --- */
+.toasts {
+  position: fixed;
+  right: var(--e-5);
+  bottom: var(--e-5);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-2);
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.toast {
+  min-width: 220px;
+  max-width: min(360px, calc(100vw - 48px));
+  padding: var(--e-3) var(--e-4);
+  background-color: var(--hud-panel-alto);
+  border: 1px solid var(--hud-line);
+  border-left: 2px solid var(--hud-cyan);
+  border-radius: var(--raio-sm);
+  font-size: var(--ts-sm);
+  color: var(--hud-text);
+  box-shadow: var(--sombra-flutuante);
+  animation: toast-entra var(--t-medio) var(--ease) both;
+}
+.toast--sucesso { border-left-color: var(--hud-green); }
+.toast--erro    { border-left-color: var(--hud-red); }
+.toast--aviso   { border-left-color: var(--hud-amber); }
+.toast--saindo  { animation: toast-sai var(--t-medio) var(--ease) both; }
+
+@keyframes toast-entra {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes toast-sai {
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0; transform: translateX(16px); }
+}
+
+/* --- Overlay compartilhado --- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background-color: rgba(2, 5, 8, 0.78);
+  backdrop-filter: blur(2px);
+  animation: fade-in var(--t-medio) var(--ease) both;
+}
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* --- Scrollbar discreta --- */
+* { scrollbar-width: thin; scrollbar-color: var(--hud-line) transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: var(--hud-line); border-radius: 4px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* --- Movimento reduzido --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

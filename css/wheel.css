@@ -1,0 +1,344 @@
+/* ============================================================
+   wheel.css — roda HUD: anéis, ticks, marcadores e animações
+   ============================================================ */
+
+.roda {
+  position: relative;
+  width: min(100%, 70vh, 760px);
+  aspect-ratio: 1 / 1;
+  isolation: isolate;
+}
+
+.roda__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ------------------------------------------------------------
+   Geometria em SVG
+   ------------------------------------------------------------ */
+.anel {
+  fill: none;
+  stroke: var(--hud-cyan-dim);
+  stroke-width: 1;
+}
+
+.anel--fino        { stroke: var(--hud-line); stroke-width: 1; }
+.anel--pontilhado  { stroke: var(--hud-cyan-dim); stroke-width: 1.5; opacity: 0.45; }
+.anel--orbita      { stroke: var(--hud-cyan-dim); stroke-width: 1; opacity: 0.35; }
+.anel--nucleo      { stroke: var(--hud-cyan); stroke-width: 1; opacity: 0.5; }
+.anel--nucleo-interno { stroke: var(--hud-line); stroke-width: 1; }
+
+/* Ticks e hachuras */
+.roda__ticks line { stroke: var(--hud-line); stroke-width: 1; }
+.roda__ticks line.tick--maior { stroke: var(--hud-cyan-dim); stroke-width: 1.5; }
+.roda__ticks line.hachura { stroke: var(--hud-cyan-dim); opacity: 0.35; }
+
+/* Anéis do núcleo que giram lentamente em sentidos alternados */
+.anel--gira {
+  transform-box: view-box;
+  transform-origin: 450px 450px;
+  opacity: 0.55;
+}
+.gira-a { animation: girar 60s linear infinite; }
+.gira-b { animation: girar 90s linear infinite reverse; stroke: var(--hud-line); }
+.gira-c { animation: girar 40s linear infinite reverse; opacity: 0.35; }
+
+@keyframes girar {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Arco de progresso geral do container */
+.arco-container__trilho {
+  fill: none;
+  stroke: var(--hud-line);
+  stroke-width: 3;
+}
+.arco-container {
+  fill: none;
+  stroke: var(--hud-cyan);
+  stroke-width: 3;
+  stroke-linecap: butt;
+  transform-box: view-box;
+  transform-origin: 450px 450px;
+  transform: rotate(-90deg);
+  filter: drop-shadow(0 0 4px rgba(79, 227, 232, 0.55));
+  transition: stroke-dasharray var(--t-lento) var(--ease), stroke var(--t-medio) var(--ease);
+}
+.arco-container.completo { stroke: var(--hud-green); filter: drop-shadow(0 0 5px rgba(107, 255, 158, 0.55)); }
+
+/* Linha radial que liga o centro ao marcador selecionado */
+.radial-selecao {
+  fill: none;
+  stroke: var(--hud-amber);
+  stroke-width: 1;
+  opacity: 0.75;
+  stroke-dasharray: 6 5;
+  filter: drop-shadow(0 0 4px rgba(255, 165, 61, 0.5));
+  transition: opacity var(--t-medio) var(--ease);
+}
+.radial-selecao[d=""] { opacity: 0; }
+
+/* Arco de ~26° atrás de cada marcador */
+.arco-meta__trilho {
+  fill: none;
+  stroke: var(--hud-line);
+  stroke-width: 4;
+  opacity: 0.8;
+}
+.arco-meta {
+  fill: none;
+  stroke: var(--hud-cyan);
+  stroke-width: 4;
+  opacity: 0.85;
+  stroke-linecap: butt;
+  transition: stroke-dasharray var(--t-lento) var(--ease), stroke var(--t-medio) var(--ease);
+}
+.arco-meta.is-hover      { stroke: var(--hud-cyan); }
+.arco-meta.is-selecionado{ stroke: var(--hud-amber); filter: drop-shadow(0 0 5px rgba(255, 165, 61, 0.6)); }
+.arco-meta.is-completo   { stroke: var(--hud-green); }
+.arco-meta.is-completo.is-selecionado { stroke: var(--hud-amber); }
+
+/* ------------------------------------------------------------
+   Marcadores (HTML sobre o SVG)
+   ------------------------------------------------------------ */
+.roda__marcadores {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.marcador {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  padding: var(--e-1);
+  --dist: 38px;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  color: var(--hud-cyan-dim);
+  border-radius: var(--raio-sm);
+  transition: transform var(--t-medio) var(--ease), color var(--t-medio) var(--ease);
+}
+
+.marcador__icone {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  font-size: 20px;
+  border-radius: 50%;
+  background-color: var(--hud-void);
+  border: 1px solid var(--hud-line);
+  transition: border-color var(--t-medio) var(--ease),
+              box-shadow var(--t-medio) var(--ease),
+              background-color var(--t-medio) var(--ease);
+}
+
+/* A porcentagem e o tooltip são absolutos: assim o ícone fica exatamente
+   sobre a órbita e o arco passa por trás dele. */
+.marcador__pct {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+             translate(calc(var(--ux, 0) * var(--dist)), calc(var(--uy, 0) * var(--dist)));
+  font-family: var(--fonte-display);
+  font-weight: 700;
+  font-size: var(--ts-sm);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 8px rgba(4, 7, 10, 0.9);
+}
+
+/* Tooltip com o título da meta */
+.marcador__tooltip {
+  position: absolute;
+  bottom: calc(100% + 18px);
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 190px;
+  padding: 3px 8px;
+  font-family: var(--fonte-display);
+  font-size: var(--ts-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--hud-text);
+  background-color: rgba(10, 17, 22, 0.95);
+  border: 1px solid var(--hud-line);
+  border-radius: var(--raio-sm);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-rapido) var(--ease);
+  z-index: 2;
+}
+
+/* Estados */
+.marcador--inferior .marcador__tooltip {
+  bottom: auto;
+  top: calc(100% + 18px);
+}
+
+.marcador:hover,
+.marcador:focus-visible { color: var(--hud-cyan); }
+.marcador:hover .marcador__icone,
+.marcador:focus-visible .marcador__icone {
+  border-color: var(--hud-cyan-dim);
+  box-shadow: var(--glow-cyan);
+}
+.marcador:hover .marcador__tooltip,
+.marcador:focus-visible .marcador__tooltip { opacity: 1; }
+
+.marcador.is-completo { color: var(--hud-green); }
+.marcador.is-completo .marcador__icone { border-color: rgba(107, 255, 158, 0.4); }
+
+.marcador.is-selecionado {
+  color: var(--hud-amber);
+  transform: translate(-50%, -50%) scale(1.12);
+  z-index: 3;
+}
+.marcador.is-selecionado .marcador__icone {
+  border-color: var(--hud-amber);
+  box-shadow: var(--glow-amber);
+  background-color: rgba(255, 165, 61, 0.08);
+}
+
+/* ------------------------------------------------------------
+   Núcleo central (HTML)
+   ------------------------------------------------------------ */
+.roda__centro {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--e-1);
+  text-align: center;
+  pointer-events: none;
+}
+.roda__centro > * { pointer-events: auto; }
+
+.centro__num {
+  font-family: var(--fonte-display);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 5.5vw, 4.25rem);
+  line-height: 0.95;
+  letter-spacing: var(--tracking-display);
+  font-variant-numeric: tabular-nums;
+  color: var(--hud-text);
+  text-shadow: 0 0 24px rgba(79, 227, 232, 0.25);
+}
+.centro__num sup {
+  font-size: 0.4em;
+  vertical-align: super;
+  color: var(--hud-cyan);
+  margin-left: 2px;
+}
+.centro__num.completo { color: var(--hud-green); }
+
+.centro__rotulo {
+  font-family: var(--fonte-display);
+  font-weight: 600;
+  font-size: var(--ts-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--hud-text-muted);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.centro__contagem {
+  font-family: var(--fonte-display);
+  font-size: var(--ts-xs);
+  letter-spacing: 0.14em;
+  color: var(--hud-cyan-dim);
+  text-transform: uppercase;
+}
+
+/* Estado vazio */
+.centro__vazio {
+  font-family: var(--fonte-display);
+  font-size: var(--ts-md);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--hud-text-muted);
+  line-height: 1.3;
+  margin-bottom: var(--e-3);
+}
+
+/* ------------------------------------------------------------
+   Sequência de boot (~1.2s)
+   ------------------------------------------------------------ */
+.roda--boot .anel--desenha { animation: hud-desenhar 900ms var(--ease) both; }
+.roda--boot .roda__ticks,
+.roda--boot .anel--pontilhado,
+.roda--boot .anel--orbita { animation: hud-surgir 700ms var(--ease) both 200ms; }
+.roda--boot .arco-container,
+.roda--boot .arco-container__trilho { animation: hud-surgir 500ms var(--ease) both 700ms; }
+.roda--boot .roda__centro { animation: hud-surgir 500ms var(--ease) both 800ms; }
+.roda--boot .marcador,
+.roda--boot .arco-meta,
+.roda--boot .arco-meta__trilho {
+  animation: hud-entra 380ms var(--ease) both;
+  animation-delay: calc(300ms + var(--i, 0) * 40ms);
+}
+
+@keyframes hud-desenhar {
+  from { stroke-dasharray: 0 100; opacity: 0.2; }
+  to   { stroke-dasharray: 100 0; opacity: 1; }
+}
+@keyframes hud-surgir {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes hud-entra {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.roda--boot .marcador { animation-name: hud-entra-marcador; }
+@keyframes hud-entra-marcador {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ------------------------------------------------------------
+   Responsividade
+   ------------------------------------------------------------ */
+@media (max-width: 1000px) {
+  .roda { width: min(92vw, 58vh, 620px); }
+  .marcador { --dist: 35px; }
+  .marcador__icone { width: 42px; height: 42px; font-size: 18px; }
+}
+
+@media (max-width: 640px) {
+  .roda { width: min(94vw, 52vh, 480px); }
+  /* Alvo de toque mínimo de 44px */
+  .marcador { min-width: 44px; min-height: 44px; justify-content: center; }
+  .marcador { --dist: 32px; }
+  .marcador__icone { width: 40px; height: 40px; font-size: 16px; }
+  .marcador__pct { font-size: var(--ts-xs); }
+  .marcador__tooltip { display: none; }
+}
+
+/* Movimento reduzido: sem rotação, sem boot em cascata */
+@media (prefers-reduced-motion: reduce) {
+  .anel--gira { animation: none !important; }
+  .roda--boot .marcador,
+  .roda--boot .arco-meta,
+  .roda--boot .arco-meta__trilho,
+  .roda--boot .anel--desenha,
+  .roda--boot .roda__centro { animation: none !important; }
+  .marcador.is-selecionado { transform: translate(-50%, -50%) scale(1.12); }
+}
