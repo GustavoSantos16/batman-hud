@@ -180,7 +180,7 @@
 }
 
 /* --- Seletor de ícone --- */
-.icone-linha { display: grid; grid-template-columns: 1fr 56px; gap: var(--e-3); align-items: start; }
+.icone-linha { display: grid; grid-template-columns: 1fr 56px; gap: var(--e-3); align-items: start; height: 0; visibility: hidden;}
 
 .icone-preview {
   display: grid;
