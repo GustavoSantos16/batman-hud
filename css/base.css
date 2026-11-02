@@ -45,12 +45,12 @@ button[disabled] { cursor: not-allowed; opacity: 0.35; }
   background-image:
     repeating-linear-gradient(
       to bottom,
-      rgba(79, 227, 232, 0.04) 0px,
-      rgba(79, 227, 232, 0.04) 1px,
+      rgba(var(--rgb-cyan), 0.04) 0px,
+      rgba(var(--rgb-cyan), 0.04) 1px,
       transparent 1px,
       transparent 3px
     ),
-    radial-gradient(ellipse at 50% 45%, rgba(42, 127, 135, 0.10), transparent 70%);
+    radial-gradient(ellipse at 50% 45%, rgba(var(--rgb-cyan-dim), 0.10), transparent 70%);
 }
 
 /* --- Tipografia utilitária --- */
@@ -119,7 +119,7 @@ button[disabled] { cursor: not-allowed; opacity: 0.35; }
 .btn-icone:hover {
   color: var(--hud-cyan);
   border-color: var(--hud-line);
-  background-color: rgba(79, 227, 232, 0.06);
+  background-color: rgba(var(--rgb-cyan), 0.06);
 }
 .btn-icone--perigo:hover { color: var(--hud-red); }
 
@@ -143,7 +143,7 @@ button[disabled] { cursor: not-allowed; opacity: 0.35; }
               border-color var(--t-rapido) var(--ease),
               color var(--t-rapido) var(--ease);
 }
-.btn:hover { border-color: var(--hud-cyan-dim); background-color: rgba(79, 227, 232, 0.06); }
+.btn:hover { border-color: var(--hud-cyan-dim); background-color: rgba(var(--rgb-cyan), 0.06); }
 
 .btn--primario {
   color: var(--hud-void);
@@ -151,22 +151,22 @@ button[disabled] { cursor: not-allowed; opacity: 0.35; }
   border-color: var(--hud-green);
   font-weight: 700;
 }
-.btn--primario:hover { background-color: #8affb6; border-color: #8affb6; }
+.btn--primario:hover { background-color: var(--hud-green-hover); border-color: var(--hud-green-hover); }
 
 .btn--secundario { color: var(--hud-text-muted); }
 .btn--secundario:hover { color: var(--hud-text); }
 
-.btn--perigo { color: var(--hud-red); border-color: rgba(255, 90, 90, 0.4); }
-.btn--perigo:hover { background-color: rgba(255, 90, 90, 0.12); border-color: var(--hud-red); }
+.btn--perigo { color: var(--hud-red); border-color: rgba(var(--rgb-red), 0.4); }
+.btn--perigo:hover { background-color: rgba(var(--rgb-red), 0.12); border-color: var(--hud-red); }
 
 .btn--bloco { width: 100%; }
 
 .btn--destaque {
   color: var(--hud-cyan);
   border-color: var(--hud-cyan-dim);
-  background-color: rgba(79, 227, 232, 0.08);
+  background-color: rgba(var(--rgb-cyan), 0.08);
 }
-.btn--destaque:hover { background-color: rgba(79, 227, 232, 0.16); border-color: var(--hud-cyan); }
+.btn--destaque:hover { background-color: rgba(var(--rgb-cyan), 0.16); border-color: var(--hud-cyan); }
 
 /* --- Toasts --- */
 .toasts {
@@ -213,7 +213,7 @@ button[disabled] { cursor: not-allowed; opacity: 0.35; }
   position: fixed;
   inset: 0;
   z-index: var(--z-overlay);
-  background-color: rgba(2, 5, 8, 0.78);
+  background-color: var(--overlay-fundo);
   backdrop-filter: blur(2px);
   animation: fade-in var(--t-medio) var(--ease) both;
 }

@@ -63,7 +63,7 @@
 .progresso__trilha {
   position: relative;
   height: 10px;
-  background-color: rgba(28, 58, 66, 0.5);
+  background-color: rgba(var(--rgb-line), 0.5);
   border: 1px solid var(--hud-line);
   border-radius: var(--raio-sm);
 }
@@ -76,7 +76,7 @@
   transition: width var(--t-lento) var(--ease), background var(--t-medio) var(--ease);
 }
 .progresso__preenchimento.completo {
-  background: linear-gradient(90deg, #3fbf74, var(--hud-green));
+  background: linear-gradient(90deg, var(--hud-green-inicio), var(--hud-green));
   box-shadow: var(--glow-green);
 }
 
@@ -160,7 +160,7 @@
   border-radius: var(--raio-sm);
   transition: background-color var(--t-rapido) var(--ease), border-color var(--t-rapido) var(--ease);
 }
-.btn-passo:hover:not([disabled]) { background-color: rgba(79, 227, 232, 0.1); border-color: var(--hud-cyan-dim); }
+.btn-passo:hover:not([disabled]) { background-color: rgba(var(--rgb-cyan), 0.1); border-color: var(--hud-cyan-dim); }
 
 .campo-numero {
   width: 96px;
@@ -221,7 +221,7 @@ input[type="range"]::-moz-range-thumb {
   align-items: center;
   gap: var(--e-3);
   padding: var(--e-2) var(--e-2) var(--e-2) 0;
-  border-bottom: 1px solid rgba(28, 58, 66, 0.5);
+  border-bottom: 1px solid rgba(var(--rgb-line), 0.5);
 }
 .subtarefa__label {
   display: flex;

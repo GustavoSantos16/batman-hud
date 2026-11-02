@@ -8,6 +8,7 @@ import * as Modais from './modals.js';
 import * as Roda from './wheel.js';
 import * as Painel from './panel.js';
 import * as Menu from './sidebar.js';
+import * as Tema from './theme.js';
 
 let elTitulo;
 let elBotaoMenu;
@@ -122,6 +123,7 @@ function iniciar() {
   Roda.iniciar();
   Painel.iniciar();
   Menu.iniciar();
+  Tema.iniciar();
   ligarEventos();
   ligarAtalhos();
 

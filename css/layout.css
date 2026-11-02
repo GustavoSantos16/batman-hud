@@ -14,12 +14,12 @@ body {
   position: relative;
   z-index: var(--z-topo);
   display: grid;
-  grid-template-columns: 38px 1fr 38px;
+  grid-template-columns: 80px 1fr 80px; /* laterais iguais mantêm o título centrado */
   align-items: center;
   gap: var(--e-3);
   padding: var(--e-3) var(--e-4);
   border-bottom: var(--borda);
-  background-color: rgba(4, 7, 10, 0.85);
+  background-color: rgba(var(--rgb-void), 0.85);
 }
 
 .barra-topo__titulo {
@@ -33,6 +33,12 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.barra-topo__acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--e-1);
 }
 
 /* --- Grid principal --- */
@@ -74,7 +80,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--hud-text-muted);
-  background-color: rgba(4, 7, 10, 0.85);
+  background-color: rgba(var(--rgb-void), 0.85);
 }
 .barra-rodape .sep { opacity: 0.4; }
 .barra-rodape kbd {

@@ -66,10 +66,10 @@
   transform-box: view-box;
   transform-origin: 450px 450px;
   transform: rotate(-90deg);
-  filter: drop-shadow(0 0 4px rgba(79, 227, 232, 0.55));
+  filter: drop-shadow(0 0 4px rgba(var(--rgb-cyan), 0.55));
   transition: stroke-dasharray var(--t-lento) var(--ease), stroke var(--t-medio) var(--ease);
 }
-.arco-container.completo { stroke: var(--hud-green); filter: drop-shadow(0 0 5px rgba(107, 255, 158, 0.55)); }
+.arco-container.completo { stroke: var(--hud-green); filter: drop-shadow(0 0 5px rgba(var(--rgb-green), 0.55)); }
 
 /* Linha radial que liga o centro ao marcador selecionado */
 .radial-selecao {
@@ -78,7 +78,7 @@
   stroke-width: 1;
   opacity: 0.75;
   stroke-dasharray: 6 5;
-  filter: drop-shadow(0 0 4px rgba(255, 165, 61, 0.5));
+  filter: drop-shadow(0 0 4px rgba(var(--rgb-amber), 0.5));
   transition: opacity var(--t-medio) var(--ease);
 }
 .radial-selecao[d=""] { opacity: 0; }
@@ -99,7 +99,7 @@
   transition: stroke-dasharray var(--t-lento) var(--ease), stroke var(--t-medio) var(--ease);
 }
 .arco-meta.is-hover      { stroke: var(--hud-cyan); }
-.arco-meta.is-selecionado{ stroke: var(--hud-amber); filter: drop-shadow(0 0 5px rgba(255, 165, 61, 0.6)); }
+.arco-meta.is-selecionado{ stroke: var(--hud-amber); filter: drop-shadow(0 0 5px rgba(var(--rgb-amber), 0.6)); }
 .arco-meta.is-completo   { stroke: var(--hud-green); }
 .arco-meta.is-completo.is-selecionado { stroke: var(--hud-amber); }
 
@@ -152,7 +152,7 @@
   font-size: var(--ts-sm);
   letter-spacing: 0.02em;
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 0 8px rgba(4, 7, 10, 0.9);
+  text-shadow: 0 0 8px rgba(var(--rgb-void), 0.9);
 }
 
 /* Tooltip com o título da meta */
@@ -171,7 +171,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--hud-text);
-  background-color: rgba(10, 17, 22, 0.95);
+  background-color: rgba(var(--rgb-panel), 0.95);
   border: 1px solid var(--hud-line);
   border-radius: var(--raio-sm);
   opacity: 0;
@@ -197,7 +197,7 @@
 .marcador:focus-visible .marcador__tooltip { opacity: 1; }
 
 .marcador.is-completo { color: var(--hud-green); }
-.marcador.is-completo .marcador__icone { border-color: rgba(107, 255, 158, 0.4); }
+.marcador.is-completo .marcador__icone { border-color: rgba(var(--rgb-green), 0.4); }
 
 .marcador.is-selecionado {
   color: var(--hud-amber);
@@ -207,7 +207,7 @@
 .marcador.is-selecionado .marcador__icone {
   border-color: var(--hud-amber);
   box-shadow: var(--glow-amber);
-  background-color: rgba(255, 165, 61, 0.08);
+  background-color: rgba(var(--rgb-amber), 0.08);
 }
 
 /* ------------------------------------------------------------
@@ -236,7 +236,7 @@
   letter-spacing: var(--tracking-display);
   font-variant-numeric: tabular-nums;
   color: var(--hud-text);
-  text-shadow: 0 0 24px rgba(79, 227, 232, 0.25);
+  text-shadow: 0 0 24px rgba(var(--rgb-cyan), 0.25);
 }
 .centro__num sup {
   font-size: 0.4em;

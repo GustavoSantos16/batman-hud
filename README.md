@@ -59,6 +59,7 @@ js/
   wheel.js          → render da roda, marcadores, seleção, boot
   panel.js          → render do painel e edição de progresso
   sidebar.js        → containers, exportar/importar
+  theme.js          → alternância entre tema escuro e claro
   modals.js         → modal de meta, modal de container, confirmações, toasts
   icons.js          → catálogo de ícones FA e validação de classe
   utils.js          → id, clamp, escape, debounce, trigonometria, download
@@ -72,7 +73,8 @@ A comunicação entre os módulos é sempre a mesma: quem quer reagir a uma muda
 
 ## Dados no localStorage
 
-Tudo vive numa única chave: **`hud-metas:v1`**.
+Tudo vive numa única chave: **`hud-metas:v1`**. A exceção é o tema (`claro` ou `escuro`),
+que fica em **`hud-metas:tema`** e por isso não entra no exportar/importar.
 
 ```jsonc
 {
@@ -163,6 +165,7 @@ Também dá para usar *DevTools → Application → Local Storage* e remover a c
 - Marcadores da roda são `<button>` de verdade, alcançáveis por `Tab`.
 - Em telas de até 640px os marcadores têm alvo de toque de no mínimo 44px.
 - `prefers-reduced-motion: reduce` desliga a rotação dos anéis e a sequência de boot.
+- O botão de sol/lua na barra superior alterna entre o tema escuro (padrão) e o claro.
 
 ---
 

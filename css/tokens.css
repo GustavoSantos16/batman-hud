@@ -15,6 +15,22 @@
   --hud-red:         #FF5A5A;  /* destrutivo */
   --hud-text:        #E6F3F5;
   --hud-text-muted:  #739299;
+  --hud-green-hover:  #8AFFB6;
+  --hud-green-inicio: #3FBF74;
+
+  /* Mesmas cores em canais RGB, para uso com transparência */
+  --rgb-void:     4, 7, 10;
+  --rgb-panel:    10, 17, 22;
+  --rgb-line:     28, 58, 66;
+  --rgb-cyan:     79, 227, 232;
+  --rgb-cyan-dim: 42, 127, 135;
+  --rgb-green:    107, 255, 158;
+  --rgb-amber:    255, 165, 61;
+  --rgb-red:      255, 90, 90;
+  --rgb-muted:    115, 146, 153;
+
+  --overlay-fundo: rgba(2, 5, 8, 0.78);
+  color-scheme: dark;
 
   /* --- Tipografia --- */
   --fonte-display: "Saira Condensed", "Arial Narrow", sans-serif;
@@ -47,10 +63,11 @@
   --borda: 1px solid var(--hud-line);
 
   /* --- Brilhos (usar com parcimônia) --- */
-  --glow-cyan:  0 0 12px rgba(79, 227, 232, 0.35);
-  --glow-amber: 0 0 16px rgba(255, 165, 61, 0.45);
-  --glow-green: 0 0 12px rgba(107, 255, 158, 0.35);
+  --glow-cyan:  0 0 12px rgba(var(--rgb-cyan), 0.35);
+  --glow-amber: 0 0 16px rgba(var(--rgb-amber), 0.45);
+  --glow-green: 0 0 12px rgba(var(--rgb-green), 0.35);
   --sombra-flutuante: 0 24px 60px rgba(0, 0, 0, 0.75);
+  --sombra-drawer: 24px 0 60px rgba(0, 0, 0, 0.6);
 
   /* --- Tempos --- */
   --t-rapido: 140ms;
@@ -65,4 +82,36 @@
   --z-drawer: 50;
   --z-modal: 60;
   --z-toast: 70;
+}
+
+/* --- Tema claro (ativado por data-tema no <html>) --- */
+:root[data-tema="claro"] {
+  --hud-void:        #EDF2F3;
+  --hud-panel:       #F7FAFA;
+  --hud-panel-alto:  #FFFFFF;
+  --hud-line:        #B4C8CD;
+  --hud-cyan:        #00697A;
+  --hud-cyan-dim:    #2F6B76;
+  --hud-green:       #0A7038;
+  --hud-amber:       #A84F00;
+  --hud-red:         #C02626;
+  --hud-text:        #0C1C22;
+  --hud-text-muted:  #4A626A;
+  --hud-green-hover:  #0C5F31;
+  --hud-green-inicio: #2E9A5C;
+
+  --rgb-void:     237, 242, 243;
+  --rgb-panel:    247, 250, 250;
+  --rgb-line:     180, 200, 205;
+  --rgb-cyan:     0, 105, 122;
+  --rgb-cyan-dim: 47, 107, 118;
+  --rgb-green:    10, 112, 56;
+  --rgb-amber:    168, 79, 0;
+  --rgb-red:      192, 38, 38;
+  --rgb-muted:    74, 98, 106;
+
+  --overlay-fundo: rgba(12, 28, 34, 0.45);
+  --sombra-flutuante: 0 24px 60px rgba(12, 28, 34, 0.22);
+  --sombra-drawer: 24px 0 60px rgba(12, 28, 34, 0.18);
+  color-scheme: light;
 }

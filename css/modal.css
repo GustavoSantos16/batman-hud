@@ -119,7 +119,7 @@
 }
 .entrada:hover, .selecao:hover, .area-texto:hover { border-color: var(--hud-cyan-dim); }
 .entrada:focus-visible, .selecao:focus-visible, .area-texto:focus-visible { border-color: var(--hud-cyan); }
-.entrada::placeholder, .area-texto::placeholder { color: rgba(115, 146, 153, 0.7); }
+.entrada::placeholder, .area-texto::placeholder { color: rgba(var(--rgb-muted), 0.7); }
 
 .area-texto { min-height: 96px; resize: vertical; line-height: 1.5; }
 
@@ -173,7 +173,7 @@
   transition: background-color var(--t-rapido) var(--ease), color var(--t-rapido) var(--ease);
 }
 .segmentado__opcao:last-child { border-right: none; }
-.segmentado__opcao:hover { color: var(--hud-text); background-color: rgba(79, 227, 232, 0.06); }
+.segmentado__opcao:hover { color: var(--hud-text); background-color: rgba(var(--rgb-cyan), 0.06); }
 .segmentado__opcao[aria-pressed="true"] {
   color: var(--hud-void);
   background-color: var(--hud-cyan);
@@ -192,7 +192,7 @@
   border: 1px solid var(--hud-line);
   border-radius: var(--raio-sm);
 }
-.icone-preview.invalido { color: var(--hud-amber); border-color: rgba(255, 165, 61, 0.5); }
+.icone-preview.invalido { color: var(--hud-amber); border-color: rgba(var(--rgb-amber), 0.5); }
 
 .icone-grade {
   display: grid;
@@ -203,7 +203,7 @@
   padding: var(--e-2);
   border: 1px solid var(--hud-line);
   border-radius: var(--raio-sm);
-  background-color: rgba(4, 7, 10, 0.4);
+  background-color: rgba(var(--rgb-void), 0.4);
 }
 .icone-opcao {
   display: grid;
@@ -216,7 +216,7 @@
   transition: color var(--t-rapido) var(--ease), border-color var(--t-rapido) var(--ease);
 }
 .icone-opcao:hover { color: var(--hud-cyan); border-color: var(--hud-line); }
-.icone-opcao[aria-pressed="true"] { color: var(--hud-cyan); border-color: var(--hud-cyan-dim); background-color: rgba(79, 227, 232, 0.1); }
+.icone-opcao[aria-pressed="true"] { color: var(--hud-cyan); border-color: var(--hud-cyan-dim); background-color: rgba(var(--rgb-cyan), 0.1); }
 
 /* --- Campos condicionais --- */
 [data-tipo-campos][hidden] { display: none; }
